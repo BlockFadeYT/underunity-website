@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+    <html class="mdc-typography">
+  <head>
+    <title>UNDERUNITY - UNDERTALE Engine</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script><link rel="stylesheet" href="node_modules/mdi/css/materialdesignicons.css" type="text/css" />
+    <link rel="stylesheet"
+          href="material-components-web.css">
+          <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+  </head>
+  <style>
+  body
+  {
+    background-color:#E0E0E0;
+  }
+.ripple{
+  overflow:hidden;
+}
+
+.ripple-effect{
+  position: absolute;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  background: white;
+
+    
+  animation: ripple-animation 2s;
+}
+
+.w {
+  width:35%;
+  margin:0 auto;
+}
+@keyframes ripple-animation {
+    from {
+      transform: scale(1);
+      opacity: 0.4;
+    }
+    to {
+      transform: scale(100);
+      opacity: 0;
+    }
+}
+  .mdc-card
+  {
+      background-color:white;
+  }
+  
+  .mdc-tab--active
+  {
+ background-color:red;
+  transition: 0.5s;
+  }
+  .mdc-tab:not(.mdc-tab--active)
+  {
+  background-color:black;
+  transition: 0.5s;
+  }
+  .mdc-tab-not-active
+  {
+     background-size: 100% 200%;
+     background-position: 0 -100%;
+    background-image: linear-gradient(to bottom, black 50%, black 50%);
+    transition: background-position 1s;
+  }
+      @font-face {
+          font-family:"Main-Mono";
+          src:url("Main-M.ttf");
+      }
+  </style>
+    <body style="width:100%;height:100%;margin:0 auto;">
+<div class="mdc-elevation--z5" style="text-align:center;max-height:100%;max-width:100%;margin:0 auto;width:100%;background-color:black;color:white;padding:20px;"><img style="display: block;
+    margin: auto;width:535px;" src="lago.png"></img>
+    <h1 class="mdc-typography--display2" style="font-family:'Main-Mono';">Beta coming soon!</h1>
+   </div>
+   <nav style="margin-bottom:20px;background:black;width:100%;text-align:center;" id="icon-text-tab-bar" class="mdc-elevation--z2 mdc-tab-bar mdc-tab-bar--icons-with-text mdc-theme--dark">
+  <a class="ripple mdc-tab mdc-tab--with-icon-and-text mdc-tab--active" id="news">
+    <i class="mdi mdi-newspaper mdc-tab__icon" aria-hidden="true"></i>
+    <span class="mdc-tab__icon-text">News</span>
+  </a>
+  <a class="ripple mdc-tab mdc-tab--with-icon-and-text mdc-tab-not-active" id="signup">
+    <i class="mdi mdi-heart mdc-tab__icon" aria-hidden="true"></i>
+    <span class="mdc-tab__icon-text">Beta Sign up</span>
+  </a>
+  <!--<a class="mdc-tab mdc-tab--with-icon-and-text" href="#nearby">
+    <i class="material-icons mdc-tab__icon" aria-hidden="true">person_pin</i>
+    <span class="mdc-tab__icon-text">About</span>
+  </a>-->
+  
+</nav>
+<div id="newsscreen">
+ <div class="mdc-card">
+  <section class="mdc-card__primary">
+    <h1 class="mdc-card__title mdc-card__title--large">Release soon!</h1>
+    <h2 class="mdc-card__subtitle">Possibly releasing sometime between <strong>8/20/17</strong><i>-</i><strong>8/27/17</strong></h2>
+  </section>
+  <section class="mdc-card__supporting-text">
+    Releasing between <strong>8/20/17</strong> and <strong>8/27/17</strong>, an slightly unstable development build of UNDERUNITY will release.<br> Some features may be missing, or  broken.<br> <i>Please report bugs in the <strong>Beta & Sign Up</strong> Tab</i>
+  </section>
+  <section class="mdc-card__actions">
+    <button class="ripple mdc-button mdc-button--compact mdc-card__action" onclick="signup();">Join beta</button>
+   <!-- Go to www.addthis.com/dashboard to customize your tools --> <div class="addthis_inline_share_toolbox"></div>
+  </section>
+</div>
+</div>
+<div id="signupscreen" class="w">
+
+ <iframe class="mdc-elevation--z5" src="https://docs.google.com/forms/d/e/1FAIpQLScIJeeXZfZyupindD31pgDnQ2B_8L5CfHW5dLPg3_yMntBRmw/viewform?embedded=true" width="500" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+
+</div>
+<script>
+$(document).ready(function() {
+  $("#bookmarkme").click(function() {
+    if (window.sidebar) { // Mozilla Firefox Bookmark
+      window.sidebar.addPanel(location.href,document.title,"");
+    } else if(window.external) { // IE Favorite
+      window.external.AddFavorite(location.href,document.title); }
+    else if(window.opera && window.print) { // Opera Hotlist
+      this.title=document.title;
+      return true;
+    }
+  });
+});
+(function (window, $) {
+  
+  $(function() {
+    
+    
+    $('.ripple').on('click', function (event) {
+      event.preventDefault();
+      
+      var $div = $('<div/>'),
+          btnOffset = $(this).offset(),
+      		xPos = event.pageX - btnOffset.left,
+      		yPos = event.pageY - btnOffset.top;
+      
+
+      
+      $div.addClass('ripple-effect');
+      var $ripple = $(".ripple-effect");
+      
+      $ripple.css("height", $(this).height());
+      $ripple.css("width", $(this).height());
+      $div
+        .css({
+          top: yPos - ($ripple.height()/2),
+          left: xPos - ($ripple.width()/2),
+          background: $(this).data("ripple-color")
+        }) 
+        .appendTo($(this));
+
+      window.setTimeout(function(){
+        $div.remove();
+      }, 2000);
+    });
+    
+  });
+  
+})(window, jQuery);
+$('#signupscreen').hide();
+$('#news').click(function() {
+    news();
+});
+function news()
+{
+   if($('#news').hasClass("mdc-tab--active") == false)
+     { $('#signup').removeClass("mdc-tab--active");
+     $('#signup').addClass("mdc-tab-not-active");
+    $('#news').addClass("mdc-tab--active");
+     $('#news').removeClass("mdc-tab-not-active");
+    $('#signupscreen').hide();
+    $('#newsscreen').show();
+     }
+}
+function signup()
+{
+  if($('#signup').hasClass("mc-tab--active") == false)
+     {
+          $('#news').removeClass("mdc-tab--active");
+           $('#news').addClass("mdc-tab-not-active");
+    $('#signup').addClass("mdc-tab--active");
+    $('#signup').removeClass("mdc-tab-not-active");
+    $('#newsscreen').hide();
+    $('#signupscreen').show();
+     }
+}
+   $('#signup').click(function() {
+     
+     signup();
+}); 
+</script>
+<!-- Go to www.addthis.com/dashboard to customize your tools --> <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5995f54960281957"></script> 
+    </body>
+   <script src="material-components-web.js"></script>
+<script>mdc.autoInit()</script>
+</html>
